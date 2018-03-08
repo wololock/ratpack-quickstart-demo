@@ -1,0 +1,9 @@
+.idea
+*.iml
+*.ipr
+out/
+build/
+target/
+.gradle/
+.lazybones/
+*.tmp
