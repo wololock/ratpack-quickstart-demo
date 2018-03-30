@@ -6,10 +6,8 @@ import ratpack.exec.util.ParallelBatch
 import ratpack.handling.Context
 import ratpack.handling.Handler
 import ratpack.http.client.HttpClient
-import ratpack.http.client.ReceivedResponse
 
 import javax.inject.Inject
-import java.nio.charset.Charset
 import java.time.Duration
 
 import static ratpack.jackson.Jackson.json
@@ -35,14 +33,12 @@ final class RecommendationsHandler implements Handler {
 
     @Override
     void handle(Context ctx) throws Exception {
-        println "[${System.currentTimeMillis()}] recommendations..."
-
-        final List<Promise<ReceivedResponse>> promises = IDS.collect { id ->
+        final List<Promise<Product>> promises = IDS.collect { id ->
             http.get(URI.create("http://localhost:5050/product/${id}"), { request ->
-                request.readTimeout(Duration.ofMillis(300))
-                request.connectTimeout(Duration.ofMillis(300))
+                request.readTimeout(Duration.ofMillis(250))
+                request.connectTimeout(Duration.ofMillis(250))
             }).onError { t ->
-                println "[${System.currentTimeMillis()}] onError executed: ${t.message}"
+                println "onError executed: ${t.message}"
             }.mapIf({ it.status.is2xx() }, { response ->
                 mapper.readValue(response.body.inputStream, Product)
             })
@@ -50,9 +46,15 @@ final class RecommendationsHandler implements Handler {
 
         ParallelBatch.of(promises)
                 .publisher()
+                .filter { product -> product != null }
+                .map { product -> new Product(product.id, product.name, product.price * 0.8)}
                 .toList()
                 .then { products ->
-                    ctx.render(json(products))
+                    ctx.render(json([
+                            discount: '-20%',
+                            total: products.size(),
+                            products: products
+                    ]))
                 }
     }
 }

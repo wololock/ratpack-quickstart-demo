@@ -7,7 +7,7 @@ import static ratpack.groovy.Groovy.ratpack
 
 ratpack {
     serverConfig {
-        threads(4)
+        threads(1)
     }
 
     bindings {
