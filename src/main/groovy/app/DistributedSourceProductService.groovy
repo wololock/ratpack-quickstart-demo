@@ -2,7 +2,6 @@ package app
 
 import ratpack.exec.Blocking
 import ratpack.exec.Promise
-import ratpack.func.Pair
 
 import java.util.concurrent.ConcurrentHashMap
 import java.util.function.Supplier
@@ -10,17 +9,31 @@ import java.util.function.Supplier
 final class DistributedSourceProductService implements ProductService {
 
     private final Map<String, Supplier<Product>> products = [
-            Pair.of(100L, new Product('PROD-001', 'Learning Ratpack', 29.99)),
-            Pair.of(130L, new Product('PROD-002', 'Implementing Domain-Driven Design', 39.99)),
-            Pair.of(1200L, new Product('PROD-003', 'Groovy In Action', 34.99)),
-            Pair.of(600L, new Product('PROD-004', 'Clean Code', 29.99)),
-            Pair.of(1500L, new Product('PROD-005', 'Code Complete', 48.99))
-    ].collectEntries { pair ->
-        [(pair.right().id): {
-            Thread.sleep(pair.left())
-            return pair.right()
-        } as Supplier<Product>]
-    } as ConcurrentHashMap
+            'PROD-001': {
+                Thread.sleep(100L)
+                return new Product(id: 'PROD-001', name: 'Learning Ratpack', price: 29.99)
+            } as Supplier<Product>,
+
+            'PROD-002': {
+                Thread.sleep(130L)
+                return new Product(id: 'PROD-002', name: 'Netty In Action', price: 39.99)
+            } as Supplier<Product>,
+
+            'PROD-003': {
+                Thread.sleep(600L)
+                return new Product(id: 'PROD-003', name: 'Clean Code', price: 42.99)
+            } as Supplier<Product>,
+
+            'PROD-004': {
+                Thread.sleep(1200L)
+                return new Product(id: 'PROD-004', name: 'Groovy In Action', price: 34.99)
+            } as Supplier<Product>,
+
+            'PROD-005': {
+                Thread.sleep(1500L)
+                return new Product(id: 'PROD-005', name: 'Code Complete', price: 49.99)
+            } as Supplier<Product>,
+    ] as ConcurrentHashMap
 
     @Override
     Promise<Product> findProductById(String id) {

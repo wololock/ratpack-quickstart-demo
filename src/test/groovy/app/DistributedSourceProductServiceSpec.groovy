@@ -35,7 +35,7 @@ class DistributedSourceProductServiceSpec extends Specification {
         }
 
         then:
-        result.complete
+        !result.complete
 
         and:
         result.value == null

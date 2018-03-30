@@ -21,7 +21,7 @@ class ProductHandlerSpec extends Specification {
         response.status == Status.OK
 
         and:
-        new JsonSlurper().parseText(response.body.text).name == 'Implementing Domain-Driven Design'
+        new JsonSlurper().parseText(response.body.text).name == 'Netty In Action'
     }
 
     def "should return 404 HTTP status if requested product does not exist"() {

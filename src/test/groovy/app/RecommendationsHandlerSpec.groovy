@@ -1,5 +1,6 @@
 package app
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import groovy.json.JsonSlurper
 import ratpack.exec.ExecResult
 import ratpack.exec.Promise
@@ -14,8 +15,10 @@ import spock.lang.Specification
 
 class RecommendationsHandlerSpec extends Specification {
 
+    final ObjectMapper mapper = new ObjectMapper()
+
     @AutoCleanup
-    final ApplicationUnderTest aut = new GroovyRatpackMainApplicationUnderTest()  {
+    final ApplicationUnderTest aut = new GroovyRatpackMainApplicationUnderTest() {
         @Override
         protected void addDefaultImpositions(ImpositionsSpec impositionsSpec) {
             impositionsSpec.add(ServerConfigImposition.of { conf ->
@@ -30,14 +33,28 @@ class RecommendationsHandlerSpec extends Specification {
     def "should return at least 2 recommendations in 300ms"() {
         when:
         ExecResult response = harness.yield {
-            println "[${System.currentTimeMillis()}] recommendations2..."
             Promise.value(aut.httpClient.get('recommendations'))
         }
+
+        Recommendations recommendations =  mapper.readValue(response.value.body.inputStream, Recommendations)
+
 
         then:
         response.value.status == Status.OK
 
         and:
-        new JsonSlurper().parseText(response.value.body.text).id as Set == ['PROD-001', 'PROD-002'] as Set
+        recommendations.discount == '-20%'
+
+        and:
+        recommendations.total == 2
+
+        and:
+        (recommendations.products.id as Set) == (['PROD-001', 'PROD-002'] as Set)
+    }
+
+    static class Recommendations {
+        String discount
+        List<Product> products
+        int total
     }
 }
