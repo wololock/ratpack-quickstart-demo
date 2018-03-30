@@ -22,5 +22,7 @@ dependencies {
   // See here for a non blocking appender http://logging.apache.org/log4j/2.x/manual/async.html
   runtime 'org.slf4j:slf4j-simple:1.7.25'
 
+  compile ratpack.dependency('dropwizard-metrics')
+
   testCompile "org.spockframework:spock-core:1.0-groovy-2.4"
 }

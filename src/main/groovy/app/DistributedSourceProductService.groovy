@@ -10,8 +10,8 @@ import java.util.function.Supplier
 final class DistributedSourceProductService implements ProductService {
 
     private final Map<String, Supplier<Product>> products = [
-            Pair.of(200L, new Product('PROD-001', 'Learning Ratpack', 29.99)),
-            Pair.of(120L, new Product('PROD-002', 'Implementing Domain-Driven Design', 39.99)),
+            Pair.of(100L, new Product('PROD-001', 'Learning Ratpack', 29.99)),
+            Pair.of(130L, new Product('PROD-002', 'Implementing Domain-Driven Design', 39.99)),
             Pair.of(1200L, new Product('PROD-003', 'Groovy In Action', 34.99)),
             Pair.of(600L, new Product('PROD-004', 'Clean Code', 29.99)),
             Pair.of(1500L, new Product('PROD-005', 'Code Complete', 48.99))
