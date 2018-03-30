@@ -1,4 +1,4 @@
-ratpack-quickstart-demo
+ratpack-quickstart-demo [![Build Status](https://travis-ci.org/wololock/ratpack-quickstart-demo.svg?branch=master)](https://travis-ci.org/wololock/ratpack-quickstart-demo)
 -----------------------------
 
 ![Cover image](ratpack.png)
