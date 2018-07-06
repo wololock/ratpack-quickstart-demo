@@ -1,7 +1,6 @@
 package app
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import groovy.json.JsonSlurper
 import ratpack.exec.ExecResult
 import ratpack.exec.Promise
 import ratpack.groovy.test.GroovyRatpackMainApplicationUnderTest
@@ -35,9 +34,7 @@ class RecommendationsHandlerSpec extends Specification {
         ExecResult response = harness.yield {
             Promise.value(aut.httpClient.get('recommendations'))
         }
-
-        Recommendations recommendations =  mapper.readValue(response.value.body.inputStream, Recommendations)
-
+        Recommendations recommendations = mapper.readValue(response.value.body.inputStream, Recommendations)
 
         then:
         response.value.status == Status.OK

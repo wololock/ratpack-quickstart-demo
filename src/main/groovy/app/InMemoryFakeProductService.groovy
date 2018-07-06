@@ -6,7 +6,7 @@ import ratpack.exec.Promise
 import java.util.concurrent.ConcurrentHashMap
 import java.util.function.Supplier
 
-final class DistributedSourceProductService implements ProductService {
+final class InMemoryFakeProductService implements ProductService {
 
     private final Map<String, Supplier<Product>> products = [
             'PROD-001': {

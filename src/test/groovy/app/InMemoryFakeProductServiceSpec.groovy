@@ -6,11 +6,11 @@ import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Subject
 
-class DistributedSourceProductServiceSpec extends Specification {
+class InMemoryFakeProductServiceSpec extends Specification {
 
     @Subject
     @Shared
-    DistributedSourceProductService service = new DistributedSourceProductService()
+    InMemoryFakeProductService service = new InMemoryFakeProductService()
 
     @AutoCleanup
     ExecHarness harness = ExecHarness.harness()

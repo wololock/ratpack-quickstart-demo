@@ -1,4 +1,4 @@
-import app.DistributedSourceProductService
+import app.InMemoryFakeProductService
 import app.ProductHandler
 import app.ProductService
 import app.RecommendationsHandler
@@ -8,7 +8,8 @@ import static ratpack.groovy.Groovy.ratpack
 
 ratpack {
     serverConfig {
-        threads(4)
+        threads(1)
+        development(false)
     }
 
     bindings {
@@ -17,7 +18,7 @@ ratpack {
         }
         bind ProductHandler
         bind RecommendationsHandler
-        bindInstance ProductService, new DistributedSourceProductService()
+        bindInstance ProductService, new InMemoryFakeProductService()
     }
 
     handlers {
