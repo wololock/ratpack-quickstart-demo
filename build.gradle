@@ -11,7 +11,7 @@ buildscript {
 apply plugin: "io.ratpack.ratpack-groovy"
 apply plugin: "com.github.johnrengelman.shadow"
 apply plugin: "idea"
-apply plugin: "eclipse"
+apply plugin: "jacoco"
 
 repositories {
   jcenter()
@@ -25,4 +25,10 @@ dependencies {
   compile ratpack.dependency('dropwizard-metrics')
 
   testCompile "org.spockframework:spock-core:1.0-groovy-2.4"
+}
+
+jacocoTestReport {
+  reports {
+    xml.enabled true
+  }
 }
