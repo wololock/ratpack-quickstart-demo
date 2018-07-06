@@ -3,7 +3,6 @@ ratpack-quickstart-demo
 
 [![Build Status](https://travis-ci.org/wololock/ratpack-quickstart-demo.svg?branch=master)](https://travis-ci.org/wololock/ratpack-quickstart-demo)
 [![codecov](https://codecov.io/gh/wololock/ratpack-quickstart-demo/branch/master/graph/badge.svg)](https://codecov.io/gh/wololock/ratpack-quickstart-demo)
-![GitHub last commit](https://img.shields.io/github/last-commit/wololock/ratpack-quickstart-demo.png)
 
 ![Cover image](ratpack.png)
 
