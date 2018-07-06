@@ -1,12 +1,15 @@
-ratpack-quickstart-demo [![Build Status](https://travis-ci.org/wololock/ratpack-quickstart-demo.svg?branch=master)](https://travis-ci.org/wololock/ratpack-quickstart-demo)
+ratpack-quickstart-demo
 -----------------------------
+
+[![Build Status](https://travis-ci.org/wololock/ratpack-quickstart-demo.svg?branch=master)](https://travis-ci.org/wololock/ratpack-quickstart-demo)
+[![codecov](https://codecov.io/gh/wololock/ratpack-quickstart-demo/branch/master/graph/badge.svg)](https://codecov.io/gh/wololock/ratpack-quickstart-demo)
+![GitHub last commit](https://img.shields.io/github/last-commit/wololock/ratpack-quickstart-demo.png)
 
 ![Cover image](ratpack.png)
 
 *Photo: http://notallwhowanderarelost.com/rat-pack/*
 
 Hello and welcome to the repository containing source code from my **Practical quickstart to Ratpack** talk. 
-
 
 ## Application architecture
 
